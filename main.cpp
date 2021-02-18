@@ -3,31 +3,36 @@
 
 using namespace std;
 
+class Cat {
+    string m_name;
+public:
+    const string &getName() const {
+        return m_name;
+    }
+
+    Cat(string name){
+        m_name = name;
+    }
+    Cat(const Cat& cat): m_name(cat.m_name){
+        cout << "in the cat copy ctor" << endl;
+    }
+};
+
+
 int main() {
-    vector<int> lilu;
-    for(int n = 0; n < 10; n++){
-        lilu.push_back(n);
+    vector<Cat> cats;
+    cats.reserve(5);
+    cats.push_back(Cat("Tim"));
+    cats.push_back(Cat("Babs"));
+
+    for( Cat c : cats){
+       cout << c.getName() << endl;
     }
 
-    for(int n = 0; n < lilu.size(); n++){
-        cout << lilu[n] << endl;
-    }
-
-    for(int &n : lilu){
-        cout << lilu.at(n); // alias for v[n] that does bounds checking
-    }
-
-    cout << endl;
-    lilu.erase(lilu.begin() + 5); // erase the fifth element
-
-    // now do a multi-pass on contents
-    for(int n = 0; n < lilu.size(); n++ ){
-        cout << lilu[n];
-    }
-    cout << endl;
-    for(int n : lilu){ // n starts at 1?
-        cout << "index:" << n << " ";
-        cout << "value: " << lilu[n] << " " << endl;
+    // see https://riptutorial.com/cplusplus/example/1678/iterating-over-std--vector
+    // for examples of iterators
+    for(auto it = begin(cats); it != end(cats); ++it) {
+        cout << (*it).getName() << "\n";
     }
     return 0;
 }

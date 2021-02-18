@@ -1,24 +1,33 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
-const int ARR_SIZE = 10;
-
 int main() {
-    // basic array review
-    int anArray[ARR_SIZE];
-    // c-style loop
-    for(int n = 0; n < ARR_SIZE; n++){
-        anArray[n] = n;
-    }
-    // range loop
-    for (int & n : anArray) {
-        cout << n << endl;
-    }
-    // pointer access
-    for(int n = 0; n < ARR_SIZE; n++){
-        *(anArray + n) = n;
+    vector<int> lilu;
+    for(int n = 0; n < 10; n++){
+        lilu.push_back(n);
     }
 
+    for(int n = 0; n < lilu.size(); n++){
+        cout << lilu[n] << endl;
+    }
+
+    for(int &n : lilu){
+        cout << lilu.at(n); // alias for v[n] that does bounds checking
+    }
+
+    cout << endl;
+    lilu.erase(lilu.begin() + 5); // erase the fifth element
+
+    // now do a multi-pass on contents
+    for(int n = 0; n < lilu.size(); n++ ){
+        cout << lilu[n];
+    }
+    cout << endl;
+    for(int n : lilu){ // n starts at 1?
+        cout << "index:" << n << " ";
+        cout << "value: " << lilu[n] << " " << endl;
+    }
     return 0;
 }

@@ -21,7 +21,6 @@ public:
 
 int main() {
     vector<Cat> cats;
-    cats.reserve(5);
     cats.push_back(Cat("Tim"));
     cats.push_back(Cat("Babs"));
 
